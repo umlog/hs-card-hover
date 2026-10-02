@@ -92,7 +92,7 @@ hearthstone.blizzard.com: 공식 패치 노트와 소식 글에서 카드 이름
 
 **데이터 사용**: 수집하는 사용자 데이터 항목 없음 — 모든 항목 체크 해제. 하단 3개 준수 선언은 모두 체크.
 
-**개인정보처리방침 URL**: `https://github.com/umlog/hs-card-hover/blob/main/PRIVACY.md`
+**개인정보처리방침 URL**: `https://umlog.github.io/hs-card-hover/PRIVACY.html`
 
 ## 배포 탭
 
