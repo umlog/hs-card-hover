@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { width: 280px; margin: 0; padding: 14px; font: 13px/1.5 system-ui, sans-serif; color: #2a2118; }
+      h1 { margin: 0 0 10px; font-size: 14px; }
+      label { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+      input[type='checkbox'] { width: 18px; height: 18px; }
+      #host { font-weight: 600; word-break: break-all; }
+      #status { margin: 10px 0 8px; color: #6b5d4d; }
+      button { width: 100%; min-height: 44px; border: 1px solid #b89b5e; border-radius: 6px; background: #f6ecd2; cursor: pointer; }
+      button:disabled { opacity: 0.6; cursor: default; }
+    </style>
+  </head>
+  <body>
+    <h1>카드 호버 for 하스스톤</h1>
+    <label>
+      <input type="checkbox" id="enabled" />
+      <span><span id="host"></span>에서 사용</span>
+    </label>
+    <div id="status" role="status"></div>
+    <button id="refresh" type="button">카드 데이터 새로고침</button>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
