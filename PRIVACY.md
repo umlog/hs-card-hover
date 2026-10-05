@@ -22,6 +22,12 @@
 
 이 요청들에는 사용자를 식별하는 정보나 방문 중인 페이지 주소를 포함하지 않습니다.
 
+## 제한적 사용
+
+이 확장 프로그램이 처리하는 정보의 사용은 제한적 사용(Limited Use) 요건을 포함한 Chrome 웹 스토어 사용자 데이터 정책을 준수합니다.
+
+The use of information received by this extension adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.
+
 ## 문의
 
 jungjyeeyoung@gmail.com
