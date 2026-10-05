@@ -1,4 +1,4 @@
-import { MESSAGE, originPatternForHost } from '../shared/constants.js';
+import { MESSAGE, originPatternForUrl } from '../shared/constants.js';
 import { isHostEnabled, setHostEnabled } from '../shared/enabled_hosts.js';
 
 const TEXT = {
@@ -14,29 +14,30 @@ const hostLabel = document.getElementById('host');
 const statusLabel = document.getElementById('status');
 const refreshButton = document.getElementById('refresh');
 
-async function getActiveHost() {
+async function getActiveSite() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.url) return null;
   const url = new URL(tab.url);
-  return url.protocol === 'http:' || url.protocol === 'https:' ? url.hostname : null;
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+  return { host: url.hostname, origin: originPatternForUrl(url) };
 }
 
-async function isActiveOn(host) {
-  const hasAccess = await chrome.permissions.contains({ origins: [originPatternForHost(host)] });
-  return hasAccess && (await isHostEnabled(host));
+async function isActiveOn(site) {
+  const hasAccess = await chrome.permissions.contains({ origins: [site.origin] });
+  return hasAccess && (await isHostEnabled(site.host));
 }
 
-async function onToggle(host) {
+async function onToggle(site) {
   try {
     if (!enabledCheckbox.checked) {
-      await setHostEnabled(host, false);
+      await setHostEnabled(site.host, false);
       return;
     }
     // Must be the first call in the click handler: Chrome only shows the prompt
     // during a user gesture. If the prompt closes this popup, the background
     // finishes enabling the site from its permissions.onAdded listener.
-    const granted = await chrome.permissions.request({ origins: [originPatternForHost(host)] });
-    if (granted) await setHostEnabled(host, true);
+    const granted = await chrome.permissions.request({ origins: [site.origin] });
+    if (granted) await setHostEnabled(site.host, true);
     else enabledCheckbox.checked = false;
   } catch (error) {
     console.warn('[popup] toggle failed', error);
@@ -61,11 +62,11 @@ async function showIndexStatus(messageType) {
 }
 
 async function init() {
-  const host = await getActiveHost();
-  if (host) {
-    hostLabel.textContent = host;
-    enabledCheckbox.checked = await isActiveOn(host);
-    enabledCheckbox.addEventListener('change', () => onToggle(host));
+  const site = await getActiveSite();
+  if (site) {
+    hostLabel.textContent = site.host;
+    enabledCheckbox.checked = await isActiveOn(site);
+    enabledCheckbox.addEventListener('change', () => onToggle(site));
   } else {
     hostLabel.textContent = TEXT.unsupportedPage;
     enabledCheckbox.disabled = true;

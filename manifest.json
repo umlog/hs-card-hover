@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "카드 호버 for 하스스톤",
   "description": "하스스톤 패치 노트에서 카드, 전장 하수인, 장신구 이름에 마우스를 올리면 카드 이미지가 뜹니다. 비공식 팬 제작.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "permissions": [
     "storage",
     "activeTab",

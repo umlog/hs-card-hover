@@ -19,8 +19,10 @@ export const MESSAGE = {
   REFRESH_INDEX: 'refreshIndex',
 };
 
-export function originPatternForHost(host) {
-  return `*://${host}/*`;
+// Must be a subset of optional_host_permissions in manifest.json, which lists
+// http and https separately, so the scheme is spelled out rather than `*://`.
+export function originPatternForUrl(url) {
+  return `${url.protocol}//${url.hostname}/*`;
 }
 
 export function hostOfOriginPattern(pattern) {
