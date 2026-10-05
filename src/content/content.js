@@ -65,6 +65,8 @@
   function createCardImage(card, name) {
     const image = document.createElement('img');
     image.alt = name;
+    // Keeps the page address out of requests to the image server, as PRIVACY.md promises.
+    image.referrerPolicy = 'no-referrer';
     image.src = artUrl(card.id, card.battlegrounds);
     let triedOtherRender = false;
     image.addEventListener('error', () => {
