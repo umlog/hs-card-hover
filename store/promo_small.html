@@ -3,12 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <style>
-      /* The tile is a straight crop of screenshot-3.jpg: 660x420 at (20,190), scaled to 440x280. */
       html, body { margin: 0; }
-      .tile { width: 440px; height: 280px; background: url('screenshot-3.jpg') -13px -127px / 853px auto no-repeat; }
+      .tile { width: 440px; height: 280px; box-sizing: border-box; padding: 0 40px; display: flex; align-items: center; gap: 28px;
+              background: #1d5c63; font-family: 'Malgun Gothic', sans-serif; }
+      img { width: 150px; height: 150px; flex: none; }
+      h1 { margin: 0; font-size: 40px; line-height: 1.1; color: #fbecc9; font-weight: 800; letter-spacing: -1px; }
+      p { margin: 10px 0 0; font-size: 17px; color: #cfe3e0; }
     </style>
   </head>
   <body>
-    <div class="tile"></div>
+    <div class="tile">
+      <img src="icon.svg" alt="" />
+      <div>
+        <h1>카드 호버</h1>
+        <p>하스스톤 패치 노트용</p>
+      </div>
+    </div>
   </body>
 </html>
